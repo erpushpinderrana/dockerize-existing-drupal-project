@@ -17,3 +17,33 @@ and MySql image that they can update as per their requirements.
 4. Setup the local repository, error logs etc. path in the docker file itself.
 
 # Let's start and follow the below steps to maintain an existing project using Docker.
+
+## Quick Setup
+1. Clone this repository and run the below command:
+```
+docker-compose up -d
+```
+2. If everthing goes well, you will see below message:
+```
+Creating php   ... done
+Creating mysql ... done
+Creating apache ... done
+```
+3. To see docker images run below command:
+```
+docker ps
+```
+You will see individual containers for PHP, MySql and Apache as shown below:
+
+| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
+
+| -------------| ------ | ------ | ------- | ------ | ----- | -----|
+
+| 09f51b5f330b | dockerize-existing-drupal-project_apache | "httpd-foreground" | 32 seconds ago | Up 30 seconds | 0.0.0.0:80->80/tcp | apache |
+
+| 8294e1800058 | dockerize-existing-drupal-project_php | "docker-php-entrypoi…" | 33 seconds ago | Up 31 seconds | 9000/tcp | php |
+
+| d8b2cbac5695 | mysql:8.0.0 | "docker-entrypoint.s…" | 33 seconds ago | Up 31 seconds | 0.0.0.0:3306->3306/tcp | mysql |
+
+
+
