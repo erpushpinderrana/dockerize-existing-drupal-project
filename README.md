@@ -78,6 +78,30 @@ docker exec -it 8294e1800058 /bin/sh
 ## Issues and Resolutions
 --WIP---
 
+## Directory Structure
+```
+.
+├── LICENSE
+├── README.md
+├── apache
+│   ├── Dockerfile
+│   └── local.apache.conf
+├── docker-compose.yml
+├── docroot
+│   └── drupal8
+|         ├── config
+│         ├── drush
+│         ├── scripts
+│         ├── vendor
+│         └── web
+|          ├── core
+│          ├── modules
+│          ├── profiles
+│          ├── sites
+│          └── themes
+└── php
+    └── Dockerfile
+```
 ## Important Docker commands
  * ``docker-compose up`` Start all the containers.
  * ``docker-compose down`` Stop all the containers.
