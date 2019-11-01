@@ -76,6 +76,28 @@ docker exec -it 8294e1800058 /bin/sh
 --WIP---
 
 ## Issues and Resolutions
+
+**Issue:** While importing or creating the database, you may face this error `ERROR 1044 (42000): Access denied for user 'drupal'@'%'`
+
+**Resolution:** You should connect with admin credentials. In our case, the user name is root and the password is admin.
+
+**Issue:** `ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/ru` 
+
+**Resolution:** Make sure correct host name is there. In our case, it's mysql.
+
+```
+$databases['default']['default'] = array (
+  'database' => 'drupal',
+  'username' => 'drupal',
+  'password' => 'drupal123',
+  'prefix' => '',
+  'host' => 'mysql',
+  'port' => '3306',
+  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+  'driver' => 'mysql',
+);
+```
+
 --WIP---
 
 ## Directory Structure
