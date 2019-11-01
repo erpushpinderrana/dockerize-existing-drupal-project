@@ -36,13 +36,9 @@ docker ps
 You will see individual containers for PHP, MySql and Apache as shown below:
 
 | CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
-
 | -------------| ------ | ------ | ------- | ------ | ----- | -----|
-
 | 09f51b5f330b | dockerize-existing-drupal-project_apache | "httpd-foreground" | 32 seconds ago | Up 30 seconds | 0.0.0.0:80->80/tcp | apache |
-
 | 8294e1800058 | dockerize-existing-drupal-project_php | "docker-php-entrypoi…" | 33 seconds ago | Up 31 seconds | 9000/tcp | php |
-
 | d8b2cbac5695 | mysql:8.0.0 | "docker-entrypoint.s…" | 33 seconds ago | Up 31 seconds | 0.0.0.0:3306->3306/tcp | mysql |
 
 
