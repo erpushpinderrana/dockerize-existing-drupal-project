@@ -83,3 +83,6 @@ docker exec -it 8294e1800058 /bin/sh
  * ``docker-compose down`` Stop all the containers.
  * ``docker system prune -a`` Delete all the docker images.
  * ``docker ps`` See all active containers.
+
+## References
+https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
