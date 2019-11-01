@@ -4,6 +4,9 @@ FROM php:${PHP_VERSION:+${PHP_VERSION}-}fpm-alpine
 RUN apk update; \
     apk upgrade;
 
+# Install gd library extension
+RUN apk add libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd && docker-php-ext-install gd    
+
 # Install MySql
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
