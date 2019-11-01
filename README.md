@@ -18,6 +18,13 @@ and MySql image that they can update as per their requirements.
 
 # Let's start and follow the below steps to maintain an existing project using Docker.
 
+## Prerequisites
+
+1. [Docker](https://docs.docker.com/engine/installation/)
+2. [Docker-Compose](https://docs.docker.com/compose/install/) - Needed for Linux
+3. [Understanding of Composer](https://getcomposer.org/doc/00-intro.md/)
+
+
 ## Quick Setup
 1. Clone this repository and run the below command:
 ```
@@ -53,7 +60,9 @@ PHP Version = 7.3.11
 APACHE_VERSION = 2.4.41
 MYSQL_VERSION = 8.0.0
 ```
-6. Now put your codebase inside `docroot` folder that is pointed to `/var/www/html` in the PHP container. You can also see it using docker command as shown below:
+6. Now put your codebase inside `docroot` folder that is pointed to `/var/www/html` in the PHP container. You can also use [Drupal Composer Project](https://github.com/drupal-composer/drupal-project) to create a Drupal installation from scratch. 
+
+You can jump to command line prompt of PHP container using below docker command:
 ```
 docker exec -it 8294e1800058 /bin/sh
 ```
@@ -65,3 +74,12 @@ docker exec -it 8294e1800058 /bin/sh
 
 ## Detailed Explanation
 --WIP---
+
+## Issues and Resolutions
+--WIP---
+
+## Important Docker commands
+ * ``docker-compose up`` Start all the containers.
+ * ``docker-compose down`` Stop all the containers.
+ * ``docker system prune -a`` Delete all the docker images.
+ * ``docker ps`` See all active containers.
