@@ -79,6 +79,7 @@ docker exec -it 8294e1800058 /bin/sh
 --WIP---
 
 ## Directory Structure
+Once you clone this respository, it comes with default index.php in docroot folder. Inside this docroot, you can replace it with your existing project codebase. For example, I have added drupal8 codebase that looks like below: 
 ```
 .
 ├── LICENSE
