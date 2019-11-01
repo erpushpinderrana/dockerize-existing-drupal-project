@@ -41,5 +41,26 @@ You will see individual containers for PHP, MySql and Apache as shown below:
 | 8294e1800058 | dockerize-existing-drupal-project_php | "docker-php-entrypoi…" | 33 seconds ago | Up 31 seconds | 9000/tcp | php |
 | d8b2cbac5695 | mysql:8.0.0 | "docker-entrypoint.s…" | 33 seconds ago | Up 31 seconds | 0.0.0.0:3306->3306/tcp | mysql |
 
+4. Now hit the http://localhost:80 in browser to ensure setup is successful. Along with the below output, you will also see phpinfo() output.
+```
+Congratulations!! Docker setup connection is successful.
+Checking MySQL integration with php.
+MySql connection is successful!
+```
+5. With the current setup you will get below versions but you can change it anytime in .env file.
+```
+PHP Version = 7.3.11
+APACHE_VERSION = 2.4.41
+MYSQL_VERSION = 8.0.0
+```
+6. Now put your codebase inside `docroot` folder that is pointed to `/var/www/html` in the PHP container. You can also see it using docker command as shown below:
+```
+docker exec -it 8294e1800058 /bin/sh
+```
+`8294e1800058` is PHP container id as shown in the above table.
 
+7. Since the Drush and composer are already part of PHP docker image, you can simply import the database using drush.
 
+8. This way the basic setup is done and you can change the composer file accordingly. In case any additional PHP library is needed, update the PHP docker file and rebuild the PHP Docker image.
+
+## Detailed Explanation
