@@ -85,9 +85,9 @@ docker exec -it 8294e1800058 /bin/sh
  * ``docker ps`` See all active containers.
 
 ## References
-https://hub.docker.com/r/wodby/drupal-php/dockerfile/
-https://github.com/mzazon/php-apache-mysql-containerized
-https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
-https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
-https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
+* https://hub.docker.com/r/wodby/drupal-php/dockerfile/
+* https://github.com/mzazon/php-apache-mysql-containerized
+* https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
+* https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
+* https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
 
