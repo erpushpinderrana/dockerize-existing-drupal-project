@@ -73,6 +73,90 @@ docker exec -it 8294e1800058 /bin/sh
 8. This way the basic setup is done and you can change the composer file accordingly. In case any additional PHP library is needed, update the PHP docker file and rebuild the PHP Docker image.
 
 ## Detailed Explanation
+1. Install [docker](https://www.docker.com/) on your machine. You may verify the installation by running below command on your terminal.
+```
+docker -D info
+```
+
+2. Fork this repository to your machine where you want to manage your codebase.
+3. Spin up the docker now using below command to create PHP, Apache and MySql containers.
+```
+docker-compose up -d
+```
+Adding the `-d` means it will start in detached mode, allowing you to continue to use that terminal window while the containers run in the background.
+
+Once you run this command, it will create all the containers and install all the relevant libraries defined in docker files. I will talk about individual docker files in detail separately. If it runs successfully, you will see the below messages.
+
+```
+Creating mysql ... done
+Creating php   ... done
+Creating apache ... done
+```
+4. Now take a look at PHP, Apache and MySql containers using below command:
+```
+docker ps
+```
+| CONTAINER ID | IMAGE | COMMAND | CREATED | STATUS | PORTS | NAMES |
+| -------------| ------ | ------ | ------- | ------ | ----- | -----|
+| 09f51b5f330b | dockerize-existing-drupal-project_apache | "httpd-foreground" | 32 seconds ago | Up 30 seconds | 0.0.0.0:80->80/tcp | apache |
+| 8294e1800058 | dockerize-existing-drupal-project_php | "docker-php-entrypoi…" | 33 seconds ago | Up 31 seconds | 9000/tcp | php |
+| d8b2cbac5695 | mysql:8.0.0 | "docker-entrypoint.s…" | 33 seconds ago | Up 31 seconds | 0.0.0.0:3306->3306/tcp | mysql |
+5. Now jump into the PHP container using the `docker exec` command.
+```
+docker exec -it 8294e1800058 /bin/sh
+```
+Since you will be using the `root` user inside the container, so you should have permissions to do anything. The code in your git repository can be found at `/var/www/html` in the container. To ensure container mounted is successful, run the below command.
+```
+/var/www/html # ls
+```
+If it shows you `index.php` that means it mounts to your local repository i.e. `docroot`
+6. Now hit the http://localhost:80 in browser to ensure setup is successful. Along with the below output, you will also see phpinfo() output.
+```
+Congratulations!! Docker setup connection is successful.
+Checking MySQL integration with php.
+MySql connection is successful!
+```
+7. Now the docker setup is done, you can put your local codebase inside the `docroot`. Now it's up to you whether you want to run multiple drupal instances within this repository or a single one. If you want to manage multiple repositories then keep the project folder inside the `docroot` repository. For example, in our case, it's `drupal8` repository.
+
+```
+.
+├── LICENSE
+├── README.md
+├── apache
+│   ├── Dockerfile
+│   └── local.apache.conf
+├── docker-compose.yml
+├── docroot
+│   └── drupal8
+|         ├── config
+│         ├── drush
+│         ├── scripts
+│         ├── vendor
+│         └── web
+|          ├── core
+│          ├── modules
+│          ├── profiles
+│          ├── sites
+│          └── themes
+└── php
+    └── Dockerfile
+```
+
+Now this project Drupal's docroot should be located at `/var/www/html/drupal8/web`.
+
+8. Now update your project's database credentials in `settings.php` or `local.settings.php` wherever you are managing. As we are already in PHP container `/var/www/html/drupal8/web`, hence we can import the database using Drush:
+
+```
+drush sql:dump --result-file=../backup.sql
+```
+Here `backup.sql` is your mysql database backup file. It can different in your case.
+9. Now access your drupal project in browser. For example, in our case it would be below URL: 
+```
+http://localhost/drupal8/web
+```
+We may create virtual host entry for above URL.
+10. 
+
 --WIP---
 
 ## Issues and Resolutions
