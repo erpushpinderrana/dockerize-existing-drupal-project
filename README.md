@@ -1,5 +1,5 @@
 # Dockerize an Existing Drupal Project
-Drupal 8 is not new now and most developers have started using Docker for local development. However, few developers still struggle to setup Docker locally. 
+Drupal 8 is not new now and most developers have started using Docker for local development. Most of them are familiar with Docker, however, few developers still struggle to setup Docker locally. 
 There are tons of documents available on the Internet which describe how to set up a local Docker + Drupal development environment. They are really helpful but most of them come with their own custom images.
 Considering folks who are new to Docker find this documentation complicated sometimes because to run Docker locally requires a lot of configurations.
 On top of that, there are multiple docker images available on Web, and developers who want to use docker in existing projects can't finalize
