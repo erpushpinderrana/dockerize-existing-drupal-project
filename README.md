@@ -10,9 +10,9 @@ If an existing project development is already happening without Docker (maybe us
 then developers don't want to spend much time on setting up it on Docker. They want to minimize the setup time and to do that they look for any relevant Docker image. Sometimes they get it easily but most of the time they find that there are some extra modules/configurations/components/libraries that are not required in their project. Hence, either they don't setup it on Docker or look for plain PHP, Apache and MySql image that they can update as per their requirements.
 
 # Solution
-1. Create separate containers for PHP, MySQL, and Apache.
+1. Create separate containers for PHP, MySQL, and Apache. To avoid any unnecessary complexities, libraries that may happen if we use irrelevant docker images.  
 2. Manage version for all the containers separately.
-3. Whatever the libraries are needed, just add the same in the individual docker file.
+3. Whatever the libraries needed, just add them in the individual docker file.
 4. Setup the local repository, error logs etc. path in the docker file itself.
 
 # Let's start and follow the below steps to maintain an existing project using Docker.
