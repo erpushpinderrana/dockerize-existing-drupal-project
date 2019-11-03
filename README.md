@@ -147,7 +147,7 @@ MySql connection is successful!
 
 Now this project Drupal's docroot should be located at `/var/www/html/drupal8/web`.
 
-8. Now update your project's database credentials in `settings.php` or `local.settings.php` wherever you are managing. As we are already in PHP container `/var/www/html/drupal8/web`, hence we can import the database using Drush:
+8. Now update your project's database credentials in `settings.php` or `settings.local.php` wherever you are managing. As we are already in PHP container `/var/www/html/drupal8/web`, hence we can import the database using Drush:
 
 ```
 drush sql:dump --result-file=../backup.sql
