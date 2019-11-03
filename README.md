@@ -111,14 +111,14 @@ Since you will be using the `root` user inside the container, so you should have
 ```
 If it shows you `index.php` that means it mounts to your local repository i.e. `docroot`.
 
-6. Now hit the http://localhost:80 in browser to ensure setup is successful. Along with the below output, you will also see phpinfo() output.
+6. Now hit the http://localhost:80 in browser to ensure setup is successful. Along with the below output, you will also see `phpinfo()` output.
 ```
 Congratulations!! Docker setup connection is successful.
 Checking MySQL integration with php.
 MySql connection is successful!
 ```
 
-7. Now the docker setup is done, you can put your local codebase inside the `docroot`. Now it's up to you whether you want to run multiple drupal instances within this repository or a single one. If you want to manage multiple repositories then keep the project folder inside the `docroot` repository. For example, in our case, it's `drupal8` repository.
+7. Now the docker setup is done, you can put your local codebase inside the `docroot`. Now it's up to you whether you want to run multiple drupal instances within this repository or only one. If you want to manage multiple repositories then keep the project folder inside the `docroot` repository. For example, in our case, it's `drupal8` repository.
 
 ```
 .
