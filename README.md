@@ -159,7 +159,7 @@ http://localhost/drupal8/web
 ```
 We may create virtual host entry for above URL. With some browsers and operating systems any path ending in `localhost` will work automatically, otherwise you may need update your hosts file so your browser will know it's a local url. 
 
-10. Also to exit from a container, just type `exit` in terminal.  
+10. Congratulations! Now you have a full local Drupal Hosting environment.
 
 ## Issues and Resolutions
 
@@ -386,6 +386,10 @@ It downloads the php image for the version defined in `.env` file. In our case, 
 composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
 ```
 More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to-install-drupal-and-manage-dependencies
+
+**Q:** How to exist from a container?
+
+**A:** To exit from a container, just type `exit` in terminal.  
 
 ## References
 * https://hub.docker.com/r/wodby/drupal-php/dockerfile/
