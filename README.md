@@ -398,3 +398,7 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 * https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
 * https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
 * https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
+
+## Recommendation
+This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image. 
+
