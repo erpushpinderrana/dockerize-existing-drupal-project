@@ -279,7 +279,7 @@ COPY local.apache.conf /usr/local/apache2/conf/local.apache.conf
 RUN echo "Include /usr/local/apache2/conf/local.apache.conf" \
     >> /usr/local/apache2/conf/httpd.conf
 ```
-It downloads the apache image for the version defined in `.env` file. In our case, it's `2.4.41`. You can change it as per your requirements.
+It downloads the alpine-based apache image for the version defined in `.env` file. In our case, it's `2.4.41`. You can change it as per your requirements.
 
 #### PHP Dockerfile
 
@@ -378,10 +378,18 @@ It downloads the php image for the version defined in `.env` file. In our case, 
  * ``docker system prune -a`` Delete all the docker images.
  * ``docker ps`` See all active containers.
 
+## FAQ
+**Q:** Can we setup a Drupal 8 - Vanilla using this?
+
+**A:** Yes, we can do that. Given we have separate containers for PHP, Apache and MySql so we can setup Vanilla Drupal 8 using composer so easily. Inside the PHP container, just run the below command and create/setup the database accordingly. 
+```
+composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+```
+More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to-install-drupal-and-manage-dependencies
+
 ## References
 * https://hub.docker.com/r/wodby/drupal-php/dockerfile/
 * https://github.com/mzazon/php-apache-mysql-containerized
 * https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
 * https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
 * https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
-
