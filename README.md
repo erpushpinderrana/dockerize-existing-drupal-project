@@ -169,7 +169,7 @@ We may create virtual host entry for above URL. With some browsers and operating
 
 **Issue:** `ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/ru` 
 
-**Resolution:** Make sure correct host name is there. In our case, it's mysql.
+**Resolution:** Make sure correct host name is there and database access settings in your `settings.php` corresponds to values in `.env` file. In our case, the host name is mysql.
 
 ```
 $databases['default']['default'] = array (
@@ -391,6 +391,9 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 
 **A:** To exit from a container, just type `exit` in terminal.  
 
+## Recommendation
+This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image. 
+
 ## References
 * https://www.drupal.org/node/2736447
 * https://hub.docker.com/r/wodby/drupal-php/dockerfile/
@@ -398,7 +401,4 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 * https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
 * https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
 * https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
-
-## Recommendation
-This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image. 
 
