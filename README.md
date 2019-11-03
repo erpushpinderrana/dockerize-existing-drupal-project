@@ -101,6 +101,7 @@ docker ps
 | 09f51b5f330b | dockerize-existing-drupal-project_apache | "httpd-foreground" | 32 seconds ago | Up 30 seconds | 0.0.0.0:80->80/tcp | apache |
 | 8294e1800058 | dockerize-existing-drupal-project_php | "docker-php-entrypoi…" | 33 seconds ago | Up 31 seconds | 9000/tcp | php |
 | d8b2cbac5695 | mysql:8.0.0 | "docker-entrypoint.s…" | 33 seconds ago | Up 31 seconds | 0.0.0.0:3306->3306/tcp | mysql |
+
 5. Now jump into the PHP container using the `docker exec` command.
 ```
 docker exec -it 8294e1800058 /bin/sh
@@ -109,13 +110,15 @@ Since you will be using the `root` user inside the container, so you should have
 ```
 /var/www/html # ls
 ```
-If it shows you `index.php` that means it mounts to your local repository i.e. `docroot`
+If it shows you `index.php` that means it mounts to your local repository i.e. `docroot`.
+
 6. Now hit the http://localhost:80 in browser to ensure setup is successful. Along with the below output, you will also see phpinfo() output.
 ```
 Congratulations!! Docker setup connection is successful.
 Checking MySQL integration with php.
 MySql connection is successful!
 ```
+
 7. Now the docker setup is done, you can put your local codebase inside the `docroot`. Now it's up to you whether you want to run multiple drupal instances within this repository or a single one. If you want to manage multiple repositories then keep the project folder inside the `docroot` repository. For example, in our case, it's `drupal8` repository.
 
 ```
@@ -150,14 +153,14 @@ Now this project Drupal's docroot should be located at `/var/www/html/drupal8/we
 drush sql:dump --result-file=../backup.sql
 ```
 Here `backup.sql` is your mysql database backup file. It can different in your case.
+
 9. Now access your drupal project in browser. For example, in our case it would be below URL: 
 ```
 http://localhost/drupal8/web
 ```
-We may create virtual host entry for above URL.
-10. 
+We may create virtual host entry for above URL. With some browsers and operating systems any path ending in `localhost` will work automatically, otherwise you may need update your hosts file so your browser will know it's a local url. 
 
---WIP---
+10. Also to exit from a container, just type `exit` in terminal.  
 
 ## Issues and Resolutions
 
