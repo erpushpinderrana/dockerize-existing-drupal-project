@@ -53,7 +53,7 @@ Congratulations!! Docker setup connection is successful.
 Checking MySQL integration with php.
 MySql connection is successful!
 ```
-5. With the current setup you will get below versions but you can change it anytime in .env file.
+5. With the current setup you will get below versions but you can change it anytime in `.env` file.
 ```
 PHP Version = 7.3.11
 APACHE_VERSION = 2.4.41
