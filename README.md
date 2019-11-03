@@ -20,7 +20,7 @@ then developers don't want to spend much time on setting up it on Docker. They w
 ## Prerequisites
 
 1. [Docker](https://docs.docker.com/engine/installation/)
-2. [Docker-Compose](https://docs.docker.com/compose/install/) - Needed for Linux
+2. [Docker-Compose](https://docs.docker.com/compose/install/)
 3. [Understanding of Composer](https://getcomposer.org/doc/00-intro.md/)
 
 
