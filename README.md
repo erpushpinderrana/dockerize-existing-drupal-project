@@ -30,7 +30,7 @@ and MySql image that they can update as per their requirements.
 ```
 docker-compose up -d
 ```
-2. If everthing goes well, you will see below message:
+2. If it runs successfully, you will see below message:
 ```
 Creating php   ... done
 Creating mysql ... done
@@ -185,8 +185,6 @@ $databases['default']['default'] = array (
 );
 ```
 
---WIP---
-
 ## Directory Structure
 Once you clone this respository, it comes with default index.php in docroot folder. Inside this docroot, you can replace it with your existing project codebase. For example, I have added drupal8 codebase that looks like below: 
 ```
@@ -212,6 +210,169 @@ Once you clone this respository, it comes with default index.php in docroot fold
 └── php
     └── Dockerfile
 ```
+## Docker Files Explanation
+Docker files define a sets of services which make up an entire application. It allows you to define the dependencies for those services, networks and volumes etc.
+
+#### docker-compose.yml
+```
+version: "3.2"
+services:
+  php:
+    build: 
+      context: './php/'
+      args:
+       PHP_VERSION: ${PHP_VERSION}
+    networks:
+      - backend
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+    container_name: php
+  apache:
+    build:
+      context: './apache/'
+      args:
+       APACHE_VERSION: ${APACHE_VERSION}
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - frontend
+      - backend
+    ports:
+      - "80:80"
+    volumes:
+      - ${PROJECT_ROOT}/:/var/www/html/
+    container_name: apache
+  mysql:
+    image: mysql:${MYSQL_VERSION:-latest}
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+            - data:/var/lib/mysql
+    networks:
+      - backend
+    environment:
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${DB_NAME}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    container_name: mysql
+networks:
+  frontend:
+  backend:
+volumes:
+    data:
+
+```
+Here version is Docker version. It has php, apache and mysql services. To avoid any custom image for PHP and apache, we are using context here to define the PHP & Apache dockerfile separately. In case of Mysql, we are directly downloading the MySql image because MySql container doesn't require any special library or configuration. You may create a separate Dockerfile for MySql if it's required in your case.  
+
+#### Apache Dockerfile
+```
+ARG APACHE_VERSION=""
+FROM httpd:${APACHE_VERSION:+${APACHE_VERSION}-}alpine
+
+RUN apk update; \
+    apk upgrade;
+
+# Copy apache vhost file to proxy php requests to php-fpm container
+COPY local.apache.conf /usr/local/apache2/conf/local.apache.conf
+RUN echo "Include /usr/local/apache2/conf/local.apache.conf" \
+    >> /usr/local/apache2/conf/httpd.conf
+```
+It downloads the apache image for the version defined in `.env` file. In our case, it's `2.4.41`. You can change it as per your requirements.
+
+#### PHP Dockerfile
+
+```
+ARG PHP_VERSION=""
+FROM php:${PHP_VERSION:+${PHP_VERSION}-}fpm-alpine
+
+RUN apk update; \
+    apk upgrade;
+
+# Install gd library extension
+RUN apk add libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd && docker-php-ext-install gd    
+
+# Install MySql
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/local/bin/composer && \
+    ln -s /root/.composer/vendor/bin/drush /usr/local/bin/drush
+
+# Install Drush
+RUN composer global require drush/drush && \
+    composer global update 
+
+# PHP packages
+RUN apk add --update \
+        libressl \
+        ca-certificates \
+        openssh-client \
+        rsync \
+        git \
+        curl \
+        wget \
+        gzip \
+        tar \
+        patch \
+        perl \
+        pcre \
+        imap \
+        imagemagick \
+        mariadb-client \
+        build-base \
+        autoconf \
+        libtool \
+        php7-dev \
+        pcre-dev \
+        imagemagick-dev \
+        php7 \
+        php7-fpm \
+        php7-opcache \
+        php7-session \
+        php7-dom \
+        php7-xml \
+        php7-xmlreader \
+        php7-ctype \
+        php7-ftp \
+        php7-gd \
+        php7-json \
+        php7-posix \
+        php7-curl \
+        php7-pdo \
+        php7-pdo_mysql \
+        php7-sockets \
+        php7-zlib \
+        php7-mcrypt \
+        php7-mysqli \
+        php7-sqlite3 \
+        php7-bz2 \
+        php7-phar \
+        php7-openssl \
+        php7-posix \
+        php7-zip \
+        php7-calendar \
+        php7-iconv \
+        php7-imap \
+        php7-soap \
+        php7-dev \
+        php7-pear \
+        php7-redis \
+        php7-mbstring \
+        php7-xdebug \
+        php7-exif \
+        php7-xsl \
+        php7-ldap \
+        php7-bcmath \
+        php7-memcached \
+        php7-oauth \
+        php7-apcu
+```
+It downloads the php image for the version defined in `.env` file. In our case, it's `7.3`. You can change it as per your requirements. Also, I have added all the minimal PHP libraries along with Composer and Drush to ensure we don't face any issue with core Drupal 8. You may add/update/delete any library in PHP dockerfile as per your requirements.
+
 ## Important Docker commands
  * ``docker-compose up`` Start all the containers.
  * ``docker-compose down`` Stop all the containers.
