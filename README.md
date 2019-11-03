@@ -392,6 +392,7 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 **A:** To exit from a container, just type `exit` in terminal.  
 
 ## References
+* https://www.drupal.org/node/2736447
 * https://hub.docker.com/r/wodby/drupal-php/dockerfile/
 * https://github.com/mzazon/php-apache-mysql-containerized
 * https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
