@@ -150,7 +150,6 @@ Now this project Drupal's docroot should be located at `/var/www/html/drupal8/we
 
 ```
 drush sql-cli < ~/my-sql-dump-file-name.sql
-
 ```
 Here `my-sql-dump-file-name.sql` is your mysql database backup file. It can different in your case.
 
@@ -391,6 +390,18 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 **Q:** How to exit from a container?
 
 **A:** To exit from a container, just type `exit` in terminal.  
+
+**Q:** How to access vi editor in MySql container?
+
+**A:** Login to MySql container using `docker exec` command. For example, `c19d6217dc5c` is MySql container id in our case. 
+```
+docker exec -it c19d6217dc5c /bin/bash 
+```
+Run `apt-get update` commad and install vim using below command:
+```
+apt-get install vim
+```
+Now vi editor is available in MySql container.
 
 ## Recommendation
 This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image.
