@@ -1,9 +1,9 @@
 # Dockerize an Existing Drupal Project
-Drupal 8 is not new now and most developers have started using Docker for local development. Most of them are familiar with Docker, however, few developers still struggle to setup Docker locally. 
+Drupal 8 is not new now and most developers have started using Docker for local development. Most of them are familiar with Docker, however, few developers still struggle to setup Docker locally.
 There are tons of documents available on the Internet which describe how to set up a local Docker + Drupal development environment. They are really helpful but most of them come with their own custom images.
 Considering folks who are new to Docker find this documentation complicated sometimes because to run Docker locally requires a lot of configurations.
 On top of that, there are multiple docker images available on Web, and developers who want to use docker in existing projects can't finalize
-what is the right Docker image for their project. 
+what is the right Docker image for their project.
 
 # Problem Statement
 If an existing project development is already happening without Docker (maybe using XAMPP, WAMP, Acquia Dev Desktop or Vagrant etc.)
@@ -59,7 +59,7 @@ PHP Version = 7.3.11
 APACHE_VERSION = 2.4.41
 MYSQL_VERSION = 8.0.0
 ```
-6. Now put your codebase inside `docroot` folder that is pointed to `/var/www/html` in the PHP container. You can also use [Drupal Composer Project](https://github.com/drupal-composer/drupal-project) to create a Drupal installation from scratch. 
+6. Now put your codebase inside `docroot` folder that is pointed to `/var/www/html` in the PHP container. You can also use [Drupal Composer Project](https://github.com/drupal-composer/drupal-project) to create a Drupal installation from scratch.
 
 You can jump to command line prompt of PHP container using below docker command:
 ```
@@ -149,15 +149,16 @@ Now this project Drupal's docroot should be located at `/var/www/html/drupal8/we
 8. Now update your project's database credentials in `settings.php` or `settings.local.php` wherever you are managing. As we are already in PHP container `/var/www/html/drupal8/web`, hence we can import the database using Drush:
 
 ```
-drush sql:dump --result-file=../backup.sql
-```
-Here `backup.sql` is your mysql database backup file. It can different in your case.
+drush sql-cli < ~/my-sql-dump-file-name.sql
 
-9. Now access your drupal project in browser. For example, in our case it would be below URL: 
+```
+Here `my-sql-dump-file-name.sql` is your mysql database backup file. It can different in your case.
+
+9. Now access your drupal project in browser. For example, in our case it would be below URL:
 ```
 http://localhost/drupal8/web
 ```
-We may create virtual host entry for above URL. With some browsers and operating systems any path ending in `localhost` will work automatically, otherwise you may need update your hosts file so your browser will know it's a local url. 
+We may create virtual host entry for above URL. With some browsers and operating systems any path ending in `localhost` will work automatically, otherwise you may need update your hosts file so your browser will know it's a local url.
 
 10. Congratulations! Now you have a full local Drupal Hosting environment.
 
@@ -167,7 +168,7 @@ We may create virtual host entry for above URL. With some browsers and operating
 
 **Resolution:** You should connect with admin credentials. In our case, the user name is root and the password is admin.
 
-**Issue:** `ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/ru` 
+**Issue:** `ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/ru`
 
 **Resolution:** Make sure correct host name is there and database access settings in your `settings.php` corresponds to values in `.env` file. In our case, the host name is mysql.
 
@@ -185,7 +186,7 @@ $databases['default']['default'] = array (
 ```
 
 ## Directory Structure
-Once you clone this respository, it comes with default index.php in docroot folder. Inside this docroot, you can replace it with your existing project codebase. For example, I have added drupal8 codebase that looks like below: 
+Once you clone this respository, it comes with default index.php in docroot folder. Inside this docroot, you can replace it with your existing project codebase. For example, I have added drupal8 codebase that looks like below:
 ```
 .
 ├── LICENSE
@@ -217,7 +218,7 @@ Docker files define a sets of services which make up an entire application. It a
 version: "3.2"
 services:
   php:
-    build: 
+    build:
       context: './php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
@@ -303,7 +304,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 # Install Drush
 RUN composer global require drush/drush && \
-    composer global update 
+    composer global update
 
 # PHP packages
 RUN apk add --update \
@@ -381,7 +382,7 @@ It downloads the php image for the version defined in `.env` file. In our case, 
 ## FAQ
 **Q:** Can we setup a Drupal 8 - Vanilla using this?
 
-**A:** Yes, we can do that. Given we have separate containers for PHP, Apache and MySql so we can setup Vanilla Drupal 8 using composer so easily. Inside the PHP container, just run the below command and create/setup the database accordingly. 
+**A:** Yes, we can do that. Given we have separate containers for PHP, Apache and MySql so we can setup Vanilla Drupal 8 using composer so easily. Inside the PHP container, just run the below command and create/setup the database accordingly.
 ```
 composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
 ```
@@ -392,7 +393,7 @@ More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to
 **A:** To exit from a container, just type `exit` in terminal.  
 
 ## Recommendation
-This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image. 
+This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to be updated as per the project requirements. Though it runs successfully in the local environment, it's not recommended to use on production environment directly. The idea is to use it as a basic Docker stack, learn and make it available for local development with minimal efforts. In the long run either you can enhance it or may switch on docker4drupal which is a more advanced and powerful Docker image.
 
 ## References
 * https://www.drupal.org/node/2736447
@@ -401,4 +402,3 @@ This stack has all the basic Docker images (PHP, Apache, and MySQL) and needs to
 * https://itnext.io/local-drupal-8-development-with-docker-ed25910cfce2
 * https://duvien.com/blog/using-docker-setup-test-environment-drupal-8-less-2-minutes
 * https://github.com/Lullabot/drupal-docker-boilerplate/blob/master/README.md
-
