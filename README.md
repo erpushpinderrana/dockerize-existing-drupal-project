@@ -387,7 +387,7 @@ composer create-project drupal-composer/drupal-project:8.x-dev drupal --stabilit
 ```
 More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to-install-drupal-and-manage-dependencies
 
-**Q:** How to exist from a container?
+**Q:** How to exit from a container?
 
 **A:** To exit from a container, just type `exit` in terminal.  
 
