@@ -183,6 +183,9 @@ $databases['default']['default'] = array (
   'driver' => 'mysql',
 );
 ```
+**Issue:** How to install & use PhpMyAdmin with Docker?
+
+**Resolution:** https://github.com/erpushpinderrana/dockerize-existing-drupal-project/issues/4
 
 ## Directory Structure
 Once you clone this respository, it comes with default index.php in docroot folder. Inside this docroot, you can replace it with your existing project codebase. For example, I have added drupal8 codebase that looks like below:
