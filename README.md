@@ -380,6 +380,7 @@ It downloads the php image for the version defined in `.env` file. In our case, 
  * ``docker-compose down`` Stop all the containers.
  * ``docker system prune -a`` Delete all the docker images.
  * ``docker ps`` See all active containers.
+ * ``docker container inspect`` Display detailed information on one or more containers
 
 ## FAQ
 **Q:** Can we setup a Drupal 8 - Vanilla using this?
