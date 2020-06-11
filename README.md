@@ -383,12 +383,17 @@ It downloads the php image for the version defined in `.env` file. In our case, 
  * ``docker container inspect`` Display detailed information on one or more containers
 
 ## FAQ
-**Q:** Can we setup a Drupal 8 - Vanilla using this?
+**Q:** Can we setup a Drupal 8/9 - Vanilla using this?
 
 **A:** Yes, we can do that. Given we have separate containers for PHP, Apache and MySql so we can setup Vanilla Drupal 8 using composer so easily. Inside the PHP container, just run the below command and create/setup the database accordingly.
 ```
-composer create-project drupal-composer/drupal-project:8.x-dev drupal --stability dev --no-interaction
+composer create-project drupal/recommended-project my_site_name_dir
 ```
+Drupal 9
+```
+composer create-project drupal/recommended-project:9.0.0 my_site_name_dir
+```
+
 More info - https://www.drupal.org/docs/develop/using-composer/using-composer-to-install-drupal-and-manage-dependencies
 
 **Q:** How to exit from a container?
