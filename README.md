@@ -381,6 +381,9 @@ It downloads the php image for the version defined in `.env` file. In our case, 
  * ``docker system prune -a`` Delete all the docker images.
  * ``docker ps`` See all active containers.
  * ``docker container inspect`` Display detailed information on one or more containers
+ * ``To stop all of Docker containers:`` docker stop $(docker ps -a -q)
+ * ``To remove all of Docker containers:`` docker rm $(docker ps -a -q)
+
 
 ## FAQ
 **Q:** Can we setup a Drupal 8/9 - Vanilla using this?
