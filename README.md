@@ -384,7 +384,7 @@ It downloads the php image for the version defined in `.env` file. In our case, 
  * ``docker stop $(docker ps -a -q)`` To stop all of Docker containers 
  * ``docker rm $(docker ps -a -q)``  To remove all of Docker containers
  * ``docker network prune`` To remove all networks not used by at least one container.
- * ``docker image inspect <image_name>`` To inspect the docker image.
+ * ``docker inspect <image_name>`` To inspect the docker image.
 
 
 ## FAQ
