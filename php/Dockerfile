@@ -5,10 +5,10 @@ RUN apk update; \
     apk upgrade;
 
 # Install gd library extension
-RUN apk add libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd && docker-php-ext-install gd    
+RUN apk add libpng libpng-dev libjpeg-turbo-dev libwebp-dev zlib-dev libxpm-dev gd
 
 # Install MySql
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd
 
 # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php && \
@@ -17,7 +17,7 @@ RUN curl -sS https://getcomposer.org/installer | php && \
 
 # Install Drush
 RUN composer global require drush/drush && \
-    composer global update 
+    composer global update
 
 # PHP packages
 RUN apk add --update \
@@ -83,7 +83,15 @@ RUN apk add --update \
         php7-memcached \
         php7-oauth \
         php7-apcu
-RUN pecl install xdebug \
-    && echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/xdebug.ini \
-    && echo "xdebug.remote_autostart=off" >> /usr/local/etc/php/conf.d/xdebug.ini
+
+# per https://secure.php.net/manual/en/opcache.installation.php
+RUN { \
+    echo 'opcache.memory_consumption=128'; \
+    echo 'opcache.interned_strings_buffer=8'; \
+    echo 'opcache.max_accelerated_files=4000'; \
+    echo 'opcache.revalidate_freq=60'; \
+    echo 'opcache.fast_shutdown=1'; \
+  } > /usr/local/etc/php/conf.d/opcache-recommended.ini;
+
+# Change php.ini configuration locally and copy
+COPY php.ini /usr/local/etc/php/php.ini

@@ -1,7 +1,7 @@
 version: "3.2"
 services:
   php:
-    build: 
+    build:
       context: './php/'
       args:
        PHP_VERSION: ${PHP_VERSION}
@@ -32,7 +32,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-            - data:/var/lib/mysql
+      - data:/var/lib/mysql
     networks:
       - backend
     environment:
@@ -41,6 +41,20 @@ services:
       MYSQL_USER: "${DB_USERNAME}"
       MYSQL_PASSWORD: "${DB_PASSWORD}"
     container_name: mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8080:80
+    links:
+      - mysql:mysql
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_USER: "${DB_USERNAME}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+    restart: always
+    networks:
+      - backend
 networks:
   frontend:
   backend:
